@@ -11,6 +11,8 @@ class Listing extends Model
 {
     use HasFactory;
 
+public $table = "hirdetesek";
+public $primaryKey = "hirdetesek_id";
     protected $fillable = [
         'felhasznalo_id',
         'kategoria_id',

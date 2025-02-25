@@ -8,9 +8,11 @@ class Purchase extends Model
 {
     use HasFactory;
 
+public $table = "vasarlasok";
+public $primaryKey = "vasarlasok_id";
     protected $fillable = [
         'vevo_id',
-        'hirdetes_id',
+        'hirdetesek_id',
         'amount',
         'status',
     ];
