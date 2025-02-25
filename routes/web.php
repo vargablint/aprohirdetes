@@ -7,3 +7,11 @@ use App\Http\Controllers\aprohirdetesController;
 
 Route::get('/', [aprohirdetesController::class,'index'])->name('fooldal');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
