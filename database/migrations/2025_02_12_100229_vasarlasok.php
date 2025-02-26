@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('vasarlasok', function (Blueprint $table) {
             $table->id('vasarlasok_id');
-            $table->foreignId('vevo_id')->constrained('felhasznalok')->onDelete('cascade');
+            $table->foreignId('vevo_id')->constrained('user')->onDelete('cascade');
             $table->foreignId('hirdetesek_id')->constrained('hirdetesek')->onDelete('cascade');
             $table->decimal('amount', 10, 2);
             $table->enum('status', ['függőben', 'befejezett', 'törölve'])->default('függőben');
