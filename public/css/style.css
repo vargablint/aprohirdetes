@@ -1,0 +1,188 @@
+/* Alapértelmezett Bootstrap navbar testreszabás */
+.navbar {
+    border-bottom: 2px solid #ddd; /* Finom elválasztóvonal a navbar alatt */
+}
+
+/* Hover állapot a navbar elemein */
+.navbar-nav .nav-item .nav-link {
+    color: #fff !important; /* Fehér szín az elemekhez */
+    transition: color 0.3s ease; /* Simább színváltozás */
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #f0ad4e !important; /* Sárga szín, amikor ráhoverelsz */
+}
+
+/* Dropdown menü stílus */
+.navbar-nav .nav-item.dropdown .dropdown-toggle {
+    color: #fff !important; /* Fehér szín a dropdown gombon */
+    transition: color 0.3s ease; /* Simább színváltozás */
+}
+
+.navbar-nav .nav-item.dropdown .dropdown-toggle:hover {
+    color: #f0ad4e !important; /* Sárga szín, amikor ráhoverelsz */
+}
+
+/* Dropdown menü stílus */
+.dropdown-menu {
+    background-color: #343a40; /* Sötét háttérszín a menünek */
+    border: none; /* Nincs keret a menü körül */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+}
+
+.dropdown-item {
+    color: #fff !important; /* Fehér szín az elemekhez */
+    transition: background-color 0.3s ease; /* Simább háttérszín-változás */
+}
+
+.dropdown-item:hover {
+    background-color: #f0ad4e !important; /* Sárga háttérszín, amikor ráhoverelsz */
+    color: #fff !important; /* Fehér szín marad */
+}
+
+/* Logo stílus */
+.navbar-brand img {
+    width: 100px; /* A logó méretének beállítása */
+    height: auto; /* Automatikus magasság, hogy megtartja az arányokat */
+}
+
+/* Kereső sáv */
+.navbar form {
+    width: 250px; /* A kereső sáv szélessége */
+    margin-right: 15px; /* Jobb margó a kereső sávnak */
+}
+
+.navbar form input {
+    border-radius: 25px; /* Lekerekített élek */
+}
+
+/* Reszponzív viselkedés (mobile nézetekhez) */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center; /* A menüelemek középre igazítva mobilon */
+    }
+
+    .navbar form {
+        width: 100%; /* A kereső sáv szélessége mobilon */
+        margin-right: 0; /* Nincs margó a kereső sávnak mobilon */
+    }
+}
+
+/* A navbar jobb oldalán lévő gombok stílusa */
+.nav-item .btn {
+    margin-left: 15px; /* Növeljük a bal oldali margót */
+    border-radius: 20px; /* Lekerekített sarkok */
+}
+
+.nav-item .btn:hover {
+    opacity: 0.8; /* Finom hover hatás */
+}
+
+/* Ha kell még nagyobb távolság a "Rólunk" kategóriától */
+.navbar-nav .nav-item:last-child {
+    margin-right: 30px; /* Jobb oldali margó növelése */
+}
+
+
+
+/* A HUB felirat dizájnja */
+.hub-text {
+    font-family: 'Roboto', sans-serif;  /* Modern betűtípus */
+    font-size: 3rem;  /* Nagyobb betűméret */
+    font-weight: bold;  /* Félkövér stílus */
+    color: #fff;  /* Fehér szín */
+    text-transform: uppercase;  /* Nagybetűs szöveg */
+    letter-spacing: 5px;  /* Tágabb betűköz */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);  /* Finom árnyék */
+    transition: transform 0.3s ease, color 0.3s ease;  /* Animációs effektusok */
+}
+
+/* Hover állapot (amikor ráviszik az egeret) */
+.hub-text:hover {
+    color: #ff7f50;  /* Szép narancssárga szín, ami változik a hover során */
+    transform: scale(1.1);  /* Kicsit megnöveli a feliratot */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5);  /* Erősebb árnyék a hover alatt */
+}
+
+
+/* Kártyákhoz használt extra stílusok */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+
+
+
+
+
+.card:hover {
+    transform: translateY(-5px); /* Kártya felugrik egy kicsit */
+}
+
+/* Profilkép */
+.card-header img {
+    border: 2px solid #fff; /* Fehér szegély */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Árnyék a profilkép körül */
+}
+
+/* Gombok */
+.btn-success {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success:hover {
+    opacity: 0.9;
+}
+
+/* A kártyák között a margó */
+.g-4 {
+    gap: 1.5rem; /* Növelt távolság a kártyák között */
+}
+
+/* Kocka háttérkép beállítása csak az adott kockára (id alapján) */
+#sell-item {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-image: url(../images/mosolyog.jpg); /* A kívánt mosolygós kép */
+    background-size: cover; /* A kép kitölti a kockát */
+    background-position: center; /* Kép középre igazítása */
+    background-repeat: no-repeat; /* A kép nem ismétlődik */
+    padding: 40px; /* Kép körül padding */
+    color: white; /* Fehér színű szöveg */
+}
+
+/* Ha a kockát hovereljük, akkor az árnyékot erősebben lássuk */
+#sell-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Gombok */
+.btn-success {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-success:hover {
+    opacity: 0.9;
+}
+
+
+footer {
+    
+    bottom: 0;
+    width: 100%;
+    background-color: #343a40; /* Az oldal háttérszínéhez illeszkedő szín */
+    color: white;
+    text-align: center;
+    padding: 10px 0; /* Padding, hogy ne legyen túl szoros */
+    z-index: 1000; /* A lábléc a legfelső rétegben legyen */
+}
+
