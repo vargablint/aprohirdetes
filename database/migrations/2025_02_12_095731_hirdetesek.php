@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->text('leiras');
             $table->decimal('ar', 10, 2);
             $table->enum('status', ['aktiv', 'eladva', 'lejart'])->default('aktiv');
-            $table->string('hely')->nullable();
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('felhasznalok')->insert([
+        DB::table('users')->insert([
             [
                 'nev' => 'Teszt Felhasználó',
                 'email' => 'teszt@example.com',
