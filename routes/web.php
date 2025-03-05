@@ -5,6 +5,9 @@ use App\Http\Controllers\aprohirdetesController;
 
 
 
+
+
+
 Route::get('/', [aprohirdetesController::class,'index'])->name('fooldal');
 
 
@@ -21,3 +24,4 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+
