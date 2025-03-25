@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\aprohirdetesController;
-
+use App\Http\Controllers\KategoriaController;
 
 
 
@@ -15,9 +15,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Logout route
 Route::post('/logout', function () {
@@ -25,3 +22,4 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kategoria');
