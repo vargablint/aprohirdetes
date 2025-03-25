@@ -1,0 +1,10 @@
+1;LucaTerézia;lucateriz@gmail.com;20000216Alma;06206572356
+2;AndrásPéter;andraspeter@gmail.com;20010312Korte;06207894567
+3;ZsófiaAnna;zsofiaanna@hotmail.com;20021122Cseresznye;06305678945
+4;GáborMiklós;gabor.miklos@yahoo.com;20030505Banán;06209783214
+5;ÉvaKatalin;evakatalin@outlook.com;20041230Szilva;06308943422
+6;JózsefLászló;joseflaszlo@icloud.com;20051205Barack;06205268234
+7;TímeaLilla;timealilla@gmail.com;20060715Narancs;06201357642
+8;BenceDániel;bencedaniel@t-online.hu;20070809Málna;06202354789
+9;VeronikaJudit;veronikajudit@mail.hu;20080518Eper;06302345701
+10;TamásZoltán;tamaszoltan@freemail.hu;20090630Szőlő;0630746821

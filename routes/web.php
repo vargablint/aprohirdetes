@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\aprohirdetesController;
-
+use App\Http\Controllers\KategoriaController;
 
 
 
@@ -21,3 +21,4 @@ Route::post('/logout', function () {
 
 Auth::routes();
 
+Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kategoria');

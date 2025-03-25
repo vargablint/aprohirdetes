@@ -17,7 +17,7 @@
           Nő
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Ruha</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','1')}}">Ruha</a></li>
           <li><a class="dropdown-item" href="#">Parfüm</a></li>
           <li><a class="dropdown-item" href="#">Kiegészítők</a></li>
         </ul>

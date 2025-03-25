@@ -10,8 +10,8 @@ return new class extends Migration {
         Schema::create('kategoriak', function (Blueprint $table) {
             $table->id('kategoria_id');
             $table->string('nev');
-            $table->string('slug')->unique();
-            $table->timestamps();
+           
+           
         });
     }
 

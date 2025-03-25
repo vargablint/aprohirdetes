@@ -51,5 +51,10 @@ class KategoriaController extends Controller
         $kategoriak->delete();
         return response()->json(['message' => 'Kategória törölve!']);
     }
+
+    public function listaz($kid){
+        $kategoria = KategoriaModel::find($kid);
+    }
 }
+
 

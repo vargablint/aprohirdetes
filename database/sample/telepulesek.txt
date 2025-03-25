@@ -1,0 +1,26 @@
+1;Budapest I
+2;Budapest II
+3;Budapest III
+4;Budapest IV
+5;Budapest V
+6;Budapest VI 
+7;Budapest VII
+8;Budapest VIII
+9;Budapest IX
+10;Budapest X 
+11;Budapest XI
+12;Budapest XII
+13;Budapest XIII
+14;Budapest XIV
+15;Budapest XV
+16;Budapest XVI
+17;Budapest XVII
+18;Budapest XVIII 
+19;Budapest XIX
+20;Budapest XX
+21;Budapest XXI
+22;Budapest XXII
+23;Budapest XXIII
+
+
+

@@ -1,0 +1,12 @@
+1;Női Ruha 
+2;Női Parfüm
+3;Női Kiegészítők
+4;Férfi Ruha 
+5;Férfi Parfüm
+6;Férfi Kiegészítők
+7;Otthon Bútor
+8;Otthon Dekoráció
+9;Otthon Háztartási Eszközök
+10;Elektronikai Eszközök Mobiltelefonok
+11;Elektronikai Eszközök Laptopok
+12;Elektronikai Eszközök Kiegészítők
