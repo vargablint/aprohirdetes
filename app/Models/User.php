@@ -18,7 +18,6 @@ public $primaryKey = "user_id";
         'email',
         'jelszo',
         'tel_szam',
-        'cim',
     ];
 
     protected $hidden = [
