@@ -16,11 +16,11 @@ public $primaryKey = "hirdetesek_id";
     protected $fillable = [
         'felhasznalo_id',
         'kategoria_id',
-        'cim',
+        'title',
         'leiras',
         'ar',
         'status',
-        'location',
+        'telepules',
     ];
 
     public function user(): BelongsTo
