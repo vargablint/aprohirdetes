@@ -5,25 +5,22 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\KategoriaModel;
 
-class CategorySeeder extends Seeder
+
+class KategoriaSeeder extends Seeder
 {
     public function run()
     {
-        $categories = [
-            'Elektronika',
-            'Divat & Ruházat',
-            'Sport & Szabadidő',
-            'Bútorok',
-        ];
-
-        foreach ($categories as $category) {
-            DB::table('categories')->insert([
-                'nev' => $category,
-                'slug' => Str::slug($category),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+        $path = database_path('sample\kategoriak.txt');
+        $file = fopen($path,"r");
+        while(! feof($file)){
+            $row = fgets($file);
+            $data = explode(";",$row);
+            $kategoria = new KategoriaModel;
+            $kategoria->nev = trim($data[1]);
+            $kategoria->save();
+            
         }
     }
 }

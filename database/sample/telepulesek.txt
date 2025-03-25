@@ -21,6 +21,3 @@
 21;Budapest XXI
 22;Budapest XXII
 23;Budapest XXIII
-
-
-

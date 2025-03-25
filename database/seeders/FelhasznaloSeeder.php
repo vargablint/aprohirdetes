@@ -5,30 +5,27 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
-class UserSeeder extends Seeder
+
+class FelhasznaloSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'nev' => 'Teszt Felhasználó',
-                'email' => 'teszt@example.com',
-                'jelszo' => Hash::make('jelszo'),
-                'tel_szam' => '06301234567',
-                'tartozkodasi_hely' => 'Budapest, Magyarország',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'nev' => 'Második Felhasználó',
-                'email' => 'masodik@example.com',
-                'jelszo' => Hash::make('password'),
-                'tel_szam' => '06309876543',
-                'tartozkodasi_hely' => 'Debrecen, Magyarország',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        $path = database_path('sample\users.txt');
+        $file = fopen($path,"r");
+        while(! feof($file)){
+            $row = fgets($file);
+            $data = explode(";",$row);
+            $felhasznalo = new User;
+            $felhasznalo->name = trim($data[1]);
+            $felhasznalo->email = trim($data[2]);
+            $felhasznalo->password = Hash::make($data[3]);
+            $felhasznalo->tel_szam = trim($data[4]);
+
+            $felhasznalo->save();
+        }
+        fclose($file);
+            
     }
 }

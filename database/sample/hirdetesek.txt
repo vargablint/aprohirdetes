@@ -11,7 +11,7 @@
 11;9;1;19;Szoknya;2 szer használt;4500;aktiv
 12;9;7;19;Kanapé;Kimosva jó állapotba; 95000;aktiv
 13;10;5;8;Versace;Jó illat, olcsobb áron vihető mint a boltba; 18000;aktiv 
-14;10;9;8;porszívó;Az egyik kereke picit akad, ezen kivül semmi baja, 5000;aktiv
+14;10;9;8;porszívó;Az egyik kereke picit akad, ezen kivül semmi baja;5000;aktiv
 15;6;12;3;töltőállomás;Jó több dolog egyszere való töltésére;3500;aktiv
 16;6;4;3;Nike Tech Fleece Jogger Nadrág; Könnyű, jól tartja a meleget és kényelmes; 11000;aktiv
 17;4;6;11;Polarizált napszemüveg;Jól csökkentik a fényvisszaverődést;7000;aktiv 

@@ -61,5 +61,13 @@ class VasarlasController extends Controller
         $vasarlasok->delete();
         return response()->json(['message' => 'Vásárlás törölve!']);
     }
+
+    public function confirmDelete($vasarlasok_id){
+        $data['error'] = false;
+        $data['vasarlasok_id'] = $vasarlasok_id;
+        $auto = VasarlasModel::find($vasarlasok_id);
+        $data['content'] = view('confirmDelete',['vasarlas' => $vasarlas])->render();
+        return response()->json($data,200,['Content-Type' => 'application/json']);
+    }
 }
 

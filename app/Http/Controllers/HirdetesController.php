@@ -62,4 +62,12 @@ class HirdetesController extends Controller
         $hirdetes->delete();
         return response()->json(['message' => 'Hirdetés törölve!']);
     }
+
+    public function confirmDelete($auto_id){
+        $data['error'] = false;
+        $data['hirdetesek_id'] = $hirdetesek_id;
+        $auto = HirdetesModel::find($hirdetesek_id);
+        $data['content'] = view('confirmDelete',['hirdetes' => $hirdetes])->render();
+        return response()->json($data,200,['Content-Type' => 'application/json']);
+    }
 }
