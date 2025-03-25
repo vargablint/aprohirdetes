@@ -22,3 +22,7 @@ Route::post('/logout', function () {
 Auth::routes();
 
 Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kategoria');
+Route::get('/rolunk',function(){
+    return view('rolunk');
+})->name('rolunk');
+

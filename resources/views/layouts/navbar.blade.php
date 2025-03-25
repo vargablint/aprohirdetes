@@ -18,8 +18,8 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="{{route('kategoria','1')}}">Ruha</a></li>
-          <li><a class="dropdown-item" href="#">Parfüm</a></li>
-          <li><a class="dropdown-item" href="#">Kiegészítők</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','2')}}">Parfüm</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','3')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
@@ -29,9 +29,9 @@
           Férfi
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Ruha</a></li>
-          <li><a class="dropdown-item" href="#">Parfüm</a></li>
-          <li><a class="dropdown-item" href="#">Kiegészítők</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','4')}}">Ruha</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','5')}}">Parfüm</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','6')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
@@ -41,9 +41,9 @@
           Otthon
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Bútor</a></li>
-          <li><a class="dropdown-item" href="#">Dekoráció</a></li>
-          <li><a class="dropdown-item" href="#">Háztartási eszközök</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','7')}}">Bútor</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','8')}}">Dekoráció</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','9')}}">Háztartási eszközök</a></li>
         </ul>
       </li>
 
@@ -53,15 +53,15 @@
           Elektronikai eszközök
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Mobiltelefonok</a></li>
-          <li><a class="dropdown-item" href="#">Laptopok</a></li>
-          <li><a class="dropdown-item" href="#">Kiegészítők</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','10')}}">Mobiltelefonok</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','11')}}">Laptopok</a></li>
+          <li><a class="dropdown-item" href="{{route('kategoria','12')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
       <!-- Rólunk fül -->
       <li class="nav-item">
-        <a class="nav-link" href="#">Rólunk</a>
+        <a class="nav-link" href="{{route('rolunk')}}">Rólunk</a>
       </li>
       
       <!-- Login és Regisztráció gombok / vagy Logout -->
