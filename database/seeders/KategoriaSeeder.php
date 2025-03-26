@@ -22,6 +22,8 @@ class KategoriaSeeder extends Seeder
             $kategoria->save();
             
         }
+        fclose($file);
+
     }
 }
 

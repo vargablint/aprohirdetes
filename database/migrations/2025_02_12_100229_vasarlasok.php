@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreignId('hirdetesek_id')->references('hirdetesek_id')->on('hirdetesek')->onDelete('cascade');
             $table->enum('status', ['fuggoben', 'befejezett', 'torolve'])->default('fuggoben');
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }

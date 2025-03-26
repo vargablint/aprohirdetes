@@ -17,7 +17,7 @@ class VasarlasokSeeder extends Seeder
             $row = fgets($file);
             $data = explode(";",$row);
             $vasarlasok = new VasarlasModel;
-            $vasarlasok->vevo_id = trim($data[1]);
+            $vasarlasok->user_id = trim($data[1]);
             $vasarlasok->hirdetesek_id = trim($data[2]);
             $vasarlasok->amount = trim($data[3]);
             $vasarlasok->status = trim($data[4]);

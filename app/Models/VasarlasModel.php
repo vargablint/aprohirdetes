@@ -1,21 +1,20 @@
 <?php
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Purchase extends Model
+class VasarlasModel extends Model
 {
-    use HasFactory;
-
-public $table = "vasarlasok";
-public $primaryKey = "vasarlasok_id";
-    protected $fillable = [
-        'vevo_id',
-        'hirdetesek_id',
-        'amount',
-        'status',
-    ];
+    public $table = "vasarlasok";
+    public $primaryKey = "vasarlasok_id";
+    public $timestamps = false;
+        protected $fillable = [
+            'vevo_id',
+            'hirdetesek_id',
+            'amount',
+            'status',
+        ];
 
     public function buyer(): BelongsTo
     {
