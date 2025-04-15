@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Hitelesisd az emailt címed </div>  <!--{{ __('Verify Your Email Address') }}-->
+                <div class="card-header">Hitelesisd az email címed </div>  <!--{{ __('Verify Your Email Address') }}-->
 
                 <div class="card-body">
                     @if (session('resent'))
