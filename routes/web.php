@@ -69,3 +69,93 @@ Route::get('/rolunk',function(){
     return view('rolunk');
 })->name('rolunk');
 
+Route::get('/noi-ruhak', [KategoriaController::class, 'noiRuhak'])->name('noi.ruhak');
+Route::get('/noiruhak',function(){
+    return view('noiruhak');
+})->name('noiruhak');
+
+Route::get('/noi-parfum', [KategoriaController::class, 'noiParfum'])->name('noi.parfum');
+Route::get('/noiparfum',function(){
+    return view('noiparfum');
+})->name('noiparfum');
+
+Route::get('/noi-kieg', [KategoriaController::class, 'noiKieg'])->name('noi.kieg');
+Route::get('/noikieg',function(){
+    return view('noikieg');
+})->name('noikieg');
+
+
+
+
+Route::get('/ferfi-ruha', [KategoriaController::class, 'ferfiRuha'])->name('ferfi.ruha');
+Route::get('/ferfiruha',function(){
+    return view('ferfiruha');
+})->name('ferfiruha');
+
+
+Route::get('/ferfi-parfum', [KategoriaController::class, 'ferfiParfum'])->name('Ferfi.parfum');
+Route::get('/ferfiparum',function(){
+    return view('ferfiparfum');
+})->name('ferfiparum');
+
+
+Route::get('/ferfi-kieg', [KategoriaController::class, 'ferfiKieg'])->name('ferfi.kieg');
+Route::get('/ferfikieg',function(){
+    return view('ferfikieg');
+})->name('ferfikieg');
+
+
+
+
+
+Route::get('/otthon-but', [KategoriaController::class, 'otthonBut'])->name('otthon.but');
+Route::get('/otthonbut',function(){
+    return view('otthonbut');
+})->name('otthonbut');
+
+Route::get('/otthon-dek', [KategoriaController::class, 'otthonDek'])->name('otthon.Dek');
+Route::get('/otthondek',function(){
+    return view('otthondek');
+})->name('otthondek');
+
+
+Route::get('/otthon-haz', [KategoriaController::class, 'otthonHaz'])->name('otthon.haz');
+Route::get('/otthonhaz',function(){
+    return view('otthonhaz');
+})->name('otthonhaz');
+
+
+
+
+
+Route::get('/ee-mobil', [KategoriaController::class, 'eeMobil'])->name('ee.mobil');
+Route::get('/eemobil',function(){
+    return view('eemobil');
+})->name('eemobil');
+
+Route::get('/ee-laptopok', [KategoriaController::class, 'eeLaptopok'])->name('ee.laptopok');
+Route::get('/eelaptopok',function(){
+    return view('eelaptopok');
+})->name('eelaptopok');
+
+
+Route::get('/ee-kieg', [KategoriaController::class, 'eeKieg'])->name('ee.kieg');
+Route::get('/eekieg',function(){
+    return view('eekieg');
+})->name('eekieg');
+
+
+
+
+
+
+
+Route::get('/eladas', [KategoriaController::class, 'eladas'])->name('eladas');
+Route::get('/eladas',function(){
+    return view('eladas');
+})->name('eladas');
+
+
+
+
+

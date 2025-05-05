@@ -61,6 +61,84 @@ class KategoriaController extends Controller
     public function listaz($kid){
         $kategoria = KategoriaModel::find($kid);
     }
+
+
+
+    public function noiRuhak()
+{
+    return view('noiruhak'); 
+}
+
+public function noiparfum()
+{
+    return view('noiparfum'); 
+}
+
+public function noikieg()
+{
+    return view('noikieg'); 
+}
+
+
+
+
+public function ferfiruha()
+{
+    return view('ferfiruha'); 
+}
+
+public function ferfiparfum()
+{
+    return view('ferfiparfum'); 
+}
+
+public function ferfikieg()
+{
+    return view('ferfikieg'); 
+}
+
+
+public function otthonbut()
+{
+    return view('otthonbut'); 
+}
+
+public function otthondek()
+{
+    return view('otthondek'); 
+}
+
+public function otthonhaz()
+{
+    return view('otthonhaz'); 
+}
+
+
+
+
+public function eemobil()
+{
+    return view('eemobil'); 
+}
+public function eelaptopok()
+{
+    return view('eelaptopok'); 
+}
+public function eekieg()
+{
+    return view('eekieg'); 
+}
+
+
+
+
+public function eladas()
+{
+    return view('eladas'); 
+}
+
+
+
 }
 
 

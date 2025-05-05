@@ -9,7 +9,7 @@
             <div id="sell-item" class="card text-center shadow-lg p-5" style="border-radius: 20px;">
                 <div class="card-body">
                     <p class="card-text">Ha el szeretnéd adni az árut, amit el szeretnél adni, kattints az alábbi gombra!</p>
-                    <a href="#" class="btn btn-success btn-lg">Hozzáadom az árut</a>
+                    <a href="{{ route('eladas') }}" class="btn btn-success btn-lg">Hozzáadom az árut</a>
                 </div>
             </div>
         </div>
