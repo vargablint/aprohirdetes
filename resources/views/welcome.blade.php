@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','csapatnev')
 @section('content')
-<div class="container mt-5 mb-5"> <!-- Margó hozzáadása a tartalom aljához, hogy a lábléc ne ragadjon hozzá -->
+<div class="container mt-5 mb-5" style="order: 2;"> <!-- Margó hozzáadása a tartalom aljához, hogy a lábléc ne ragadjon hozzá -->
     <!-- Középre igazított nagy kocka mosolygós képpel és szöveggel -->
     <div class="row justify-content-center mb-5">
         <div class="col-md-8">
@@ -19,7 +19,11 @@
 
     
     <div class="row g-4 justify-content-center">
-        @forelse($hirdetesek as $hirdetes)
+        @if (count($hirdetesek) <= 0)
+        <p class="text-center">Jelenleg nincsenek legnépszerűbb termékek.</p>
+            
+        @else        
+        @foreach($hirdetesek as $hirdetes)
         <div class="col-3">
             <div class="card h-100 d-flex flex-column">
                 <div class="card-header text-center">
@@ -36,6 +40,10 @@
                 </div>
             </div>
         </div>
-    @empty
-        <p class="text-center">Jelenleg nincsenek legnépszerűbb termékek.</p>
-    @endforelse
+        @endforeach
+        @endif
+    </div>
+    
+    
+    
+</div>

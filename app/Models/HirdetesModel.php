@@ -46,9 +46,6 @@ public function scopePopular($query)
         return $this->hasMany(Image::class);
     }
 
-    public function purchase(): BelongsTo
-    {
-        return $this->belongsTo(Purchase::class, 'hirdetes_id');
-    }
+    
 }
 

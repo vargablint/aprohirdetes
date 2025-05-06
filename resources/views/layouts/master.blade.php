@@ -11,17 +11,18 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
    
-
-    @include('layouts.navbar')
+    <div style="order: 1">
+        @include('layouts.navbar')
+    </div>
  
 
-    <div class="container flex-grow-1">
+    <div style="order: 2;">
         @yield('content')
     </div>
     
 
 
-    <footer class="bg-dark container-fluid mt-auto">
+    <footer class="bg-dark container-fluid mt-auto" style="order: 3;">
         <div class="row">
             <div class="col-12">
                 <div class="text-center text-white p-5">

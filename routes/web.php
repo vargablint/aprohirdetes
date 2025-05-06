@@ -6,6 +6,7 @@ use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\HirdetesController;
 use App\Http\Controllers\VasarlasController;
 use App\Http\Controllers\KosarController;
+use Illuminate\Support\Facades\Auth;
 
 
 
