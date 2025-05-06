@@ -40,6 +40,8 @@ Route::get('/kategoriak/uj',[KategoriaController::class,'store']);
 Route::get('/kategoriak/modositas/{kategoria_id}',[KategoriaController::class,'edit']);
 Route::get('/kategoriak/modotisas/{kategoria_id}',[KategoriaController::class,'update']);
 Route::get('/kategoriak/torles',[KategoriaController::class,'destroy']);
+Route::get('/kategoria/{id}', [KategoriaController::class, 'show'])->name('kategoria');
+
 
 
 Route::get('/vasarlasok',[VasarlasController::class,'index'])->name('vasarlasok');

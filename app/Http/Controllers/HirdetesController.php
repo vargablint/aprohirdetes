@@ -9,7 +9,7 @@ class HirdetesController extends Controller
 {
     public function index()
     {
-        return response()->json(HirdetesModel::with('hirdetesek', 'user')->get());
+        $hirdetesek = HirdetesModel::with(['kategoria', 'telepules', 'user'])->get();
     }
 
     public function store(Request $request)

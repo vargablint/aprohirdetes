@@ -28,19 +28,19 @@ public $primaryKey = "hirdetesek_id";
         return $this->belongsTo(User::class);
     }
 
-    public function category(): BelongsTo
+    public function kategoria(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(KategoriaModel::class);
     }
 
-    public function images(): HasMany
+    public function vasarlasok(): BelongsTo
     {
-        return $this->hasMany(Image::class);
+        return $this->belongsTo(VasarlasModel::class, 'hirdetes_id');
     }
 
-    public function purchase(): BelongsTo
-    {
-        return $this->belongsTo(Purchase::class, 'hirdetes_id');
-    }
+    public function telepules()
+{
+    return $this->belongsTo(TelepulesModel::class, 'telepules_id');
+}
 }
 
