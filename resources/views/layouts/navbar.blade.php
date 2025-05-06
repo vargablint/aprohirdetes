@@ -30,7 +30,7 @@
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
           <li><a class="dropdown-item" href="{{route('ferfiruha')}}">Ruha</a></li>
-          <li><a class="dropdown-item" href="{{route('ferfiparum')}}">Parfüm</a></li>
+          <li><a class="dropdown-item" href="{{route('ferfiparfum')}}">Parfüm</a></li>
           <li><a class="dropdown-item" href="{{route('ferfikieg')}}">Kiegészítők</a></li>
         </ul>
       </li>
@@ -82,6 +82,22 @@
         <a class="nav-link btn btn-secondary text-white" href="{{ route('register') }}">Regisztráció</a>
       </li>
       @endif
+
+      !-- Kosár ikon -->
+      <li class="nav-item ms-3">
+        <a class="nav-link position-relative" href="{{ route('kosar.megtekint') }}">
+          🛒
+          @php
+            $kosar = session('kosar', []);
+            $osszdb = array_sum(array_column($kosar, 'quantity'));
+          @endphp
+          @if($osszdb > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ $osszdb }}
+            </span>
+          @endif
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('title','csapatnev')
 @section('content')
-
 <div class="container mt-5 mb-5"> <!-- Margó hozzáadása a tartalom aljához, hogy a lábléc ne ragadjon hozzá -->
     <!-- Középre igazított nagy kocka mosolygós képpel és szöveggel -->
     <div class="row justify-content-center mb-5">
@@ -15,66 +14,12 @@
         </div>
     </div>
 
-    <div class="row g-4 justify-content-center">
-        <!-- Első kártya -->
-        <div class="col-3">
-            <div class="card h-100 d-flex flex-column">
-                <div class="card-header text-center">
-                    <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
-                </div>
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Elektronika</h5>
-                    <p class="card-text mt-0">Ár: 15,000 Ft</p>
-                </div>
-            </div>
-        </div>
+    <hr class="my-5">
+    <h2 class="text-center mb-4">Legnépszerűbb termékek</h2>
 
-        <!-- Második kártya -->
-        <div class="col-3">
-            <div class="card h-100 d-flex flex-column">
-                <div class="card-header text-center">
-                    <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
-                </div>
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Ruházat</h5>
-                    <p class="card-text mt-0">Ár: 8,500 Ft</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Harmadik kártya -->
-        <div class="col-3">
-            <div class="card h-100 d-flex flex-column">
-                <div class="card-header text-center">
-                    <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
-                </div>
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Otthon</h5>
-                    <p class="card-text mt-0">Ár: 12,000 Ft</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</br>
-    <div class="row g-4 justify-content-center">
-        <!-- Első kártya -->
-        <div class="col-3">
-            <div class="card h-100 d-flex flex-column">
-                <div class="card-header text-center">
-                    <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
-                </div>
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Elektronika</h5>
-                    <p class="card-text mt-0">Ár: 15,000 Ft</p>
-                </div>
-            </div>
-        </div>
     
-        <!-- Második kártya -->
+    <div class="row g-4 justify-content-center">
+        @forelse($hirdetesek as $hirdetes)
         <div class="col-3">
             <div class="card h-100 d-flex flex-column">
                 <div class="card-header text-center">
@@ -82,31 +27,15 @@
                 </div>
                 <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Ruházat</h5>
-                    <p class="card-text mt-0">Ár: 8,500 Ft</p>
+                    <h5 class="card-title">{{ $hirdetes->title }}</h5>
+                    <p class="card-text">Ár: {{ $hirdetes->ar }} Ft</p>
+                    <form action="{{ route('kosar.hozzaad', ['id' => $hirdetes->hirdetesek_id]) }}" method="POST">
+                        @csrf
+                        <button class="btn btn-primary mt-2">Megveszem</button>
+                    </form>
                 </div>
             </div>
         </div>
-    
-        <!-- Harmadik kártya -->
-        <div class="col-3">
-            <div class="card h-100 d-flex flex-column">
-                <div class="card-header text-center">
-                    <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
-                </div>
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title">Kategória: Otthon</h5>
-                    <p class="card-text mt-0">Ár: 12,000 Ft</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
-
-
-
-@endsection
+    @empty
+        <p class="text-center">Jelenleg nincsenek legnépszerűbb termékek.</p>
+    @endforelse

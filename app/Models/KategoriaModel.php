@@ -17,8 +17,8 @@ class KategoriaModel extends Model
         'nev',
     ];
 
-    public function listings(): HasMany
+    public function hirdetesek(): HasMany
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(HirdetesModel::class, 'kategoria_id'); 
     }
 }

@@ -28,10 +28,18 @@ public $primaryKey = "hirdetesek_id";
         return $this->belongsTo(User::class);
     }
 
-    public function category(): BelongsTo
+    public function kategoria()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(KategoriaModel::class, 'kategoria_id'); // Feltételezve, hogy a kategoria_id a kapcsolat
     }
+
+    // HirdetesModel
+public function scopePopular($query)
+{
+    return $query->where('is_popular', true)
+        ->orderBy('views', 'desc')
+        ->take(10);  // Csak a 10 legnépszerűbb
+}
 
     public function images(): HasMany
     {
