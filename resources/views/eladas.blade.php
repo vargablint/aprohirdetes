@@ -32,7 +32,7 @@
                 <!-- Fénykép feltöltés -->
                 <div class="form-box text-center">
                     <label for="kep" class="btn btn-primary">Fénykép feltöltés</label>
-                    <input type="file" id="kep" name="kep" class="d-none" accept="image/*">
+                    <input type="file" id="kep" name="kepek[]" multiple class="d-none" accept="image/*">
                     <div id="preview-container" class="mt-3" style="display: none;">
                         <p class="text-success">Sikeresen feltöltve:</p>
                         <img id="preview-image" src="#" alt="Előnézet"
@@ -90,4 +90,21 @@
                 </div>
             </form>
         </div>
+
+
+        <script>
+            document.getElementById('kep').addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('preview-image').src = e.target.result;
+                        document.getElementById('preview-container').style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+        </script>
+
+        
     @endsection

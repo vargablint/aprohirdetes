@@ -120,6 +120,7 @@ class HirdetesController extends Controller
             'kategoria_id' => 'required|exists:kategoriak,kategoria_id',
             'telepules_id' => 'required|exists:telepulesek,telepules_id',
             'status' => 'in:active,sold,expired',
+            'kepek.*' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
     
         // Új hirdetés létrehozása
@@ -133,6 +134,24 @@ class HirdetesController extends Controller
         $hirdetes->status = 'aktiv'; 
         
         $hirdetes->save();
+
+
+         // Képek mentése, ha vannak
+         if ($request->hasFile('kepek')) {
+            foreach ($request->file('kepek') as $fajl) {
+                $path = $fajl->store('kepek', 'public');
+        
+                KepekModel::create([
+                    'hirdetesek_id' => $hirdetes->hirdetesek_id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
+
+      
+
+
+
     
         return redirect()->route('eladas')->with('success', 'Hirdetés sikeresen feltöltve!');
     }

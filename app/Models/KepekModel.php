@@ -8,7 +8,7 @@ class KepekModel extends Model
 {
     protected $table = 'kepek';
 
-    protected $fillable = ['hirdetesek_id', 'file_path'];
+    protected $fillable = ['hirdetesek_id', 'image_path'];
 
     public function hirdetes()
     {
