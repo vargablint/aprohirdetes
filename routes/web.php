@@ -23,7 +23,6 @@ Route::get('/vasarlas', function () {
     return view('vasarlas');
 })->name('vasarlas');
 
-Route::get('/eladas', [HirdetesController::class, 'eladas'])->name('eladas');
 
 
 Route::get('/noi-ruhak', [HirdetesController::class, 'noiruhak'])->name('noi.ruhak');
@@ -42,6 +41,10 @@ Route::get('/eemobil', [HirdetesController::class, 'eemobil'])->name('eemobil');
 Route::get('/eelaptopok', [HirdetesController::class, 'eelaptopok'])->name('eelaptopok');
 Route::get('/eekieg', [HirdetesController::class, 'eekieg'])->name('eekieg');
 
+Route::post('/hirdetesek', [HirdetesController::class, 'store'])->name('hirdetesek.store');
+
+
+Route::get('/eladas', [HirdetesController::class, 'create'])->name('eladas');
 
 
 

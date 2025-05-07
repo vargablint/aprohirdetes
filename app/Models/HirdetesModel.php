@@ -14,13 +14,13 @@ class HirdetesModel extends Model
 public $table = "hirdetesek";
 public $primaryKey = "hirdetesek_id";
     protected $fillable = [
-        'felhasznalo_id',
+        'user_id',
         'kategoria_id',
         'title',
         'leiras',
         'ar',
         'status',
-        'telepules',
+        'telepules_id',
     ];
 
     public function user(): BelongsTo
@@ -41,10 +41,15 @@ public function scopePopular($query)
         ->take(10);  // Csak a 10 legnépszerűbb
 }
 
-    public function images(): HasMany
+    public function kepek(): HasMany
     {
-        return $this->hasMany(Image::class);
+        return $this->hasMany(KepekModel::class);
     }
+
+    public function telepules()
+{
+    return $this->belongsTo(TelepulesModel::class, 'telepules_id');
+}
 
     
 }

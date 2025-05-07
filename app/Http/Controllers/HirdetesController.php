@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\HirdetesModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\KepekModel;
+use App\Models\KategoriaModel;
+use App\Models\User;
+use App\Models\TelepulesModel;
+
 
 class HirdetesController extends Controller
 {
     public function eladas()
     {
         $hirdetesek = HirdetesModel::all();
-        return view('eladas', compact('hirdetesek'));
+        $kategoriak = KategoriaModel::all();
+    
+        return view('eladas', compact('hirdetesek', 'kategoriak'));
     }
     public function legnepszerubb()
     {
@@ -103,28 +111,46 @@ class HirdetesController extends Controller
         return response()->json($hirdetes->load('kategoriak', 'user'));
     }
 
-    public function update(Request $request, HirdetesModel $hirdetes)
+    public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'leiras' => 'required|string',
             'ar' => 'required|numeric|min:0',
-            'kategoria_id' => 'required|exists:categories,id',
-            'telepules' => 'required|string|max:255',
+            'kategoria_id' => 'required|exists:kategoriak,kategoria_id',
+            'telepules_id' => 'required|exists:telepulesek,telepules_id',
             'status' => 'in:active,sold,expired',
         ]);
-
-        $hirdetes->update($request->all());
-
-        return response()->json($hirdetes);
+    
+        // Új hirdetés létrehozása
+        $hirdetes = new HirdetesModel();
+        $hirdetes->user_id = 1;
+        $hirdetes->title = $validatedData['title'];
+        $hirdetes->leiras = $validatedData['leiras'];
+        $hirdetes->ar = $validatedData['ar'];
+        $hirdetes->kategoria_id = $validatedData['kategoria_id'];
+        $hirdetes->telepules_id = $validatedData['telepules_id'];
+        $hirdetes->status = 'aktiv'; 
+        
+        $hirdetes->save();
+    
+        return redirect()->route('eladas')->with('success', 'Hirdetés sikeresen feltöltve!');
     }
+
+
+    public function create(KategoriaModel $kat)
+{   
+    $kategoriak = KategoriaModel::all();
+    $telepulesek = TelepulesModel::all();
+
+    return view('eladas',compact('telepulesek'), compact('kategoriak'));  // Telepulesek változó átadása a nézetnek
+}
 
     public function destroy(HirdetesModel $hirdetes)
     {
         $hirdetes->delete();
         return response()->json(['message' => 'Hirdetés törölve!']);
     }
-
 
 
     public function index()
@@ -137,4 +163,9 @@ class HirdetesController extends Controller
 
         return view('welcome', compact('legnepszerubb'));
     }
+
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id'); // Feltételezve, hogy a hirdetesek táblában user_id található
+}
 }
