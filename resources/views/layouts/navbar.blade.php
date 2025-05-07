@@ -63,6 +63,10 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('rolunk')}}">Rólunk</a>
       </li>
+
+      <ul>
+        <li><a href="{{ route('hirdetesek.sajat') }}">Saját hirdetéseim</a></li>
+    </ul>
       
       <!-- Login és Regisztráció gombok / vagy Logout -->
       @if (Auth::check())

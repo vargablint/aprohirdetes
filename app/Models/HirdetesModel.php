@@ -23,10 +23,10 @@ public $primaryKey = "hirdetesek_id";
         'telepules_id',
     ];
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 
     public function kategoria()
     {
@@ -34,12 +34,7 @@ public $primaryKey = "hirdetesek_id";
     }
 
     // HirdetesModel
-public function scopePopular($query)
-{
-    return $query->where('is_popular', true)
-        ->orderBy('views', 'desc')
-        ->take(10);  // Csak a 10 legnépszerűbb
-}
+
 
     public function kepek(): HasMany
     {

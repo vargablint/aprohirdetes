@@ -30,11 +30,7 @@ public $primaryKey = "user_id";
 
     public function listings(): HasMany
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(HirdetesModel::class);
     }
 
-    public function purchases(): HasMany
-    {
-        return $this->hasMany(Purchase::class, 'vevo_id');
-    }
 }

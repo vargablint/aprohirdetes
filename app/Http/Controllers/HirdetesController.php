@@ -9,7 +9,7 @@ use App\Models\KepekModel;
 use App\Models\KategoriaModel;
 use App\Models\User;
 use App\Models\TelepulesModel;
-
+use Symfony\Component\ErrorHandler\Debug;
 
 class HirdetesController extends Controller
 {
@@ -108,7 +108,7 @@ class HirdetesController extends Controller
 
     public function show(HirdetesModel $hirdetes)
     {
-        return response()->json($hirdetes->load('kategoriak', 'user'));
+        return response()->json($hirdetes->load('kategoria', 'user', 'telepules', 'kepek'));
     }
 
     public function store(Request $request)
@@ -121,10 +121,8 @@ class HirdetesController extends Controller
             'telepules_id' => 'required|exists:telepulesek,telepules_id',
             'status' => 'in:active,sold,expired',
         ]);
-    
-        // Új hirdetés létrehozása
         $hirdetes = new HirdetesModel();
-        $hirdetes->user_id = 1;
+        $hirdetes->user_id = Auth::id();
         $hirdetes->title = $validatedData['title'];
         $hirdetes->leiras = $validatedData['leiras'];
         $hirdetes->ar = $validatedData['ar'];
@@ -132,7 +130,10 @@ class HirdetesController extends Controller
         $hirdetes->telepules_id = $validatedData['telepules_id'];
         $hirdetes->status = 'aktiv'; 
         
+        
+
         $hirdetes->save();
+
     
         return redirect()->route('eladas')->with('success', 'Hirdetés sikeresen feltöltve!');
     }
@@ -146,26 +147,32 @@ class HirdetesController extends Controller
     return view('eladas',compact('telepulesek'), compact('kategoriak'));  // Telepulesek változó átadása a nézetnek
 }
 
-    public function destroy(HirdetesModel $hirdetes)
-    {
-        $hirdetes->delete();
-        return response()->json(['message' => 'Hirdetés törölve!']);
-    }
-
-
-    public function index()
-    {
-        // Lekérjük a legnépszerűbb hirdetéseket
-        $legnepszerubb = HirdetesModel::where('is_popular', true)
-            ->orderBy('views', 'desc')  // Például nézetek száma szerint
-            ->take(10)  // Ha csak a 10 legnépszerűbb hirdetést szeretnéd
-            ->get();
-
-        return view('welcome', compact('legnepszerubb'));
-    }
-
-    public function user()
+public function torles($id)
 {
-    return $this->belongsTo(User::class, 'user_id'); // Feltételezve, hogy a hirdetesek táblában user_id található
+    $hirdetes = HirdetesModel::findOrFail($id);
+
+    // Ellenőrzés, hogy a bejelentkezett felhasználó a tulajdonos-e
+    if ($hirdetes->user_id !== Auth::id()) {
+        abort(403, 'Nincs jogosultságod ezt a hirdetést törölni.');
+    }
+
+    // Csak a hirdetés törlése
+    $hirdetes->delete();
+
+    return redirect()->back()->with('success', 'A hirdetés sikeresen törölve lett.');
+}
+
+    
+
+
+
+public function sajatHirdetesek()
+{
+    
+    
+    $user = Auth::user();
+    $hirdetesek = HirdetesModel::where('user_id', Auth::id())->get();
+
+    return view('sajathirdetes', compact('hirdetesek'));
 }
 }
