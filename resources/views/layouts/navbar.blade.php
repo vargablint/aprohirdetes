@@ -6,7 +6,7 @@
    
     <!-- Kategóriák -->
     <ul class="navbar-nav ml-auto">
-      <form class="d-flex" action="#" method="GET">
+      <form class="d-flex" action="{{ url('/kereses') }}" method="GET">
         <input class="form-control me-2" type="search" placeholder="Keresés..." aria-label="Keresés" name="query">
         <button class="btn btn-outline-success" type="submit">Keresés</button>
       </form>
@@ -76,7 +76,7 @@
       @else
       <!-- Ha a felhasználó nincs bejelentkezve -->
       <li class="nav-item">
-        <a class="nav-link btn btn-primary text-white" href="{{ route('login') }}">Login</a>
+        <a class="nav-link btn btn-primary text-white" href="{{ route('login') }}">Bejelentkezés</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn btn-secondary text-white" href="{{ route('register') }}">Regisztráció</a>

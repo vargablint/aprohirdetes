@@ -7,8 +7,8 @@
         <div class="col-md-8">
             <div id="sell-item" class="card text-center shadow-lg p-5" style="border-radius: 20px;">
                 <div class="card-body">
-                    <p class="card-text">Ha el szeretnéd adni az árut, amit el szeretnél adni, kattints az alábbi gombra!</p>
-                    <a href="{{ route('eladas') }}" class="btn btn-success btn-lg">Hozzáadom az árut</a>
+                    <p class="card-text">Ha el szeretnél adni egy terméket, akkor az alábbi Eladás gombra kattintva megteheted.</p>
+                    <a href="{{ route('eladas') }}" class="btn btn-success btn-lg">Eladás</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                     <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
                 </div>
                 <!--<img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">-->
-                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
+                <img src="{{ asset('images/' . ($hirdetes->image ?: 'polo.png')) }}" class="card-img-top" alt="Termék képe">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title">{{ $hirdetes->title }}</h5>
                     <p class="card-text">Ár: {{ $hirdetes->ar }} Ft</p>

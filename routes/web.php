@@ -7,6 +7,7 @@ use App\Http\Controllers\HirdetesController;
 use App\Http\Controllers\VasarlasController;
 use App\Http\Controllers\KosarController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\KeresesController;
 
 
 
@@ -105,3 +106,10 @@ Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kate
 Route::get('/rolunk',function(){
     return view('rolunk');
 })->name('rolunk');
+
+
+
+
+
+Route::get('/kereses', [KeresesController::class, 'keres']);
+
