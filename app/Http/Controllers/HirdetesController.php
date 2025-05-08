@@ -102,6 +102,61 @@ class HirdetesController extends Controller
     }
 
 
+    public function adminfelhasznalok()
+    {
+        $users = User::all();
+        return view('adminfelhasznalok', compact('users'));
+    }
+
+    
+public function editUser($id)
+{
+    $user = User::findOrFail($id);
+    return view('edit_user', compact('user'));
+}
+
+public function updateUser(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'is_admin' => 'required|in:0,1',
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'is_admin' => $request->is_admin,
+    ]);
+
+
+
+
+    $user->save();
+
+    return redirect()->route('adminfelhasznalok')->with('success', 'Felhasználó frissítve!');
+}
+
+public function deleteUser($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('adminfelhasznalok')->with('success', 'Felhasználó törölve!');
+}
+
+
+
+public function adminHirdetesek()
+{
+    // Az adminokhoz tartozó összes hirdetés lekérdezése
+    $hirdetesek = HirdetesModel::with('user')->get();
+
+    return view('adminhirdetesek', compact('hirdetesek'));
+}
+
+
 
 
     
@@ -147,12 +202,12 @@ class HirdetesController extends Controller
     return view('eladas',compact('telepulesek'), compact('kategoriak'));  // Telepulesek változó átadása a nézetnek
 }
 
-public function torles($id)
+public function destroy($id)
 {
     $hirdetes = HirdetesModel::findOrFail($id);
 
-    // Ellenőrzés, hogy a bejelentkezett felhasználó a tulajdonos-e
-    if ($hirdetes->user_id !== Auth::id()) {
+    // Ha admin vagy, ne szükséges a tulajdonos ellenőrzés
+    if (Auth::user()->is_admin == 0 && $hirdetes->user_id !== Auth::id()) {
         abort(403, 'Nincs jogosultságod ezt a hirdetést törölni.');
     }
 
@@ -160,6 +215,32 @@ public function torles($id)
     $hirdetes->delete();
 
     return redirect()->back()->with('success', 'A hirdetés sikeresen törölve lett.');
+}
+
+public function edit($id)
+{
+    $hirdetes = HirdetesModel::findOrFail($id);
+    return view('szerkesztes', compact('hirdetes'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'leiras' => 'required|string',
+        'ar' => 'required|numeric',
+        'status' => 'required|string|in:aktiv,szuneteltetve',
+    ]);
+
+    $hirdetes = HirdetesModel::findOrFail($id);
+    $hirdetes->update([
+        'title' => $request->title,
+        'leiras' => $request->leiras,
+        'ar' => $request->ar,
+        'status' => $request->status,
+    ]);
+
+    return redirect()->route('admin.hirdetesek')->with('success', 'A hirdetés sikeresen frissítve lett.');
 }
 
     

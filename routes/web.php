@@ -52,6 +52,24 @@ Route::get('/eladas', [HirdetesController::class, 'create'])->name('eladas');
 Route::middleware('auth')->get('/sajathirdetes', [HirdetesController::class, 'sajatHirdetesek'])->name('hirdetesek.sajat');
 Route::middleware(['auth'])->group(function () {
     Route::delete('/hirdetesek/{id}/torles', [HirdetesController::class, 'torles'])->name('hirdetesek.torles');
+
+    Route::middleware(['auth'])->prefix('admin')->group(function () {
+        Route::get('/adminfelhasznalok', [HirdetesController::class, 'adminfelhasznalok'])->name('adminfelhasznalok');
+        Route::get('/felhasznalo/{id}/edit', [HirdetesController::class, 'editUser'])->name('admin.user.edit');
+        Route::post('/felhasznalo/{id}/update', [HirdetesController::class, 'updateUser'])->name('admin.user.update');
+        Route::delete('/felhasznalo/{id}', [HirdetesController::class, 'deleteUser'])->name('admin.user.delete');
+    });
+    Route::get('/admin/hirdetesek', [HirdetesController::class, 'adminHirdetesek'])->name('admin.hirdetesek');
+    Route::get('/admin', [HirdetesController::class, 'admin'])->name('admin');
+
+    Route::delete('/hirdetes/{id}', [HirdetesController::class, 'destroy'])->name('hirdetesek.torles');
+
+    Route::get('/hirdetes/{id}/edit', [HirdetesController::class, 'edit'])->name('hirdetesek.szerkesztes');
+    Route::put('/hirdetes/{id}', [HirdetesController::class, 'update'])->name('hirdetesek.frissites');
+
+
+
+
 });
 
 
@@ -113,3 +131,6 @@ Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kate
 Route::get('/rolunk',function(){
     return view('rolunk');
 })->name('rolunk');
+
+
+

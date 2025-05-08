@@ -64,9 +64,9 @@
         <a class="nav-link" href="{{route('rolunk')}}">Rólunk</a>
       </li>
 
-      <ul>
-        <li><a href="{{ route('hirdetesek.sajat') }}">Saját hirdetéseim</a></li>
-    </ul>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('hirdetesek.sajat') }}">Saját hirdetéseim</a></li>
+      </li>
       
       <!-- Login és Regisztráció gombok / vagy Logout -->
       @if (Auth::check())
@@ -87,7 +87,6 @@
       </li>
       @endif
 
-      !-- Kosár ikon -->
       <li class="nav-item ms-3">
         <a class="nav-link position-relative" href="{{ route('kosar.megtekint') }}">
           🛒
@@ -102,6 +101,23 @@
           @endif
         </a>
       </li>
+      @if(Auth::user() !== null)
+      @if (Auth::user()->is_admin)
+          
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Admin panel
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="{{route('adminfelhasznalok')}}">Felhasznalok</a></li>
+          <li><a class="dropdown-item" href="{{route('admin.hirdetesek')}}">Hirdetesek</a></li>
+          <li><a class="dropdown-item" href="{{route('admin')}}">Admin</a></li>
+        </ul>
+      </li>
+
+      @endif
+      @endif
     </ul>
   </div>
 </nav>

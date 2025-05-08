@@ -16,7 +16,8 @@ public $primaryKey = "user_id";
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'is_admin',
     ];
 
     protected $hidden = [

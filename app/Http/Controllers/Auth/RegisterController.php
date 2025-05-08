@@ -7,19 +7,21 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
+
+
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    
+
 
     use RegistersUsers;
 
@@ -46,27 +48,45 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+
+
+    /**
+     * Create a new user instance after a valid registration.
+
+     * @param  array  $data
+     * @return \App\Models\User
+     */
+    public function register(Request $request)
     {
-        return Validator::make($data, [
+        // A validációs szabályok
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        // Ha a validáció nem sikerül
+        if ($validator->fails()) {
+            return redirect()->route('register')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Ha a checkbox be van pipálva, és a bejelentkezett felhasználó admin
+        $isAdmin = $request->has('is_admin') && $request->input('is_admin') == true && Auth::user()->is_admin;
+
+        // Felhasználó létrehozása
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'is_admin' => $isAdmin,  // Admin státusz beállítása
         ]);
+
+        // Bejelentkeztetés
+        Auth::login($user);
+
+        return redirect()->route('/');
     }
 }
+
