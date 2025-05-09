@@ -22,4 +22,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('kepek');
     }
+
+    public function kepek()
+{
+    return $this->hasMany(KepekModel::class, 'hirdetesek_id');
+}
 };

@@ -1,34 +1,143 @@
 @extends('layouts.master')
 
+
 @section('content')
-<form method="POST" action="{{ route('register') }}">
-    @csrf
+    <div class="container">
+        <div class="form-container">
+            <h2>Regisztrálj nálunk!</h2>
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-    <!-- Név mező -->
-    <div>
-        <label for="name">Név</label>
-        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                <!-- Név mező -->
+                <div class="input-group">
+                    <label for="name">Név</label>
+                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                    @error('name')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Email mező -->
+                <div class="input-group">
+                    <label for="email">Email cím</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Jelszó mező -->
+                <div class="input-group">
+                    <label for="password">Jelszó</label>
+                    <input id="password" type="password" name="password" required>
+                    @error('password')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Jelszó megerősítése mező -->
+                <div class="input-group">
+                    <label for="password_confirmation">Jelszó megerősítése</label>
+                    <input id="password_confirmation" type="password" name="password_confirmation" required>
+                </div>
+
+                <button type="submit" class="submit-btn">Regisztrálás</button>
+            </form>
+        </div>
     </div>
 
-    <!-- Email mező -->
-    <div>
-        <label for="email">Email cím</label>
-        <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    </div>
 
-    <!-- Jelszó mező -->
-    <div>
-        <label for="password">Jelszó</label>
-        <input id="password" type="password" name="password" required>
-    </div>
-
-    <!-- Jelszó megerősítése mező -->
-    <div>
-        <label for="password_confirmation">Jelszó megerősítése</label>
-        <input id="password_confirmation" type="password" name="password_confirmation" required>
-    </div>
+<style>
+    /* Alap reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 
-    <button type="submit">Regisztrálás</button>
-</form>
+
+/* Container, hogy középre helyezze az űrlapot */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* Űrlap dizájn */
+.form-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Cím */
+h2 {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* Input mezők */
+.input-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Hibaüzenet */
+.error {
+    color: #ff0000;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Gomb */
+.submit-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.submit-btn:focus {
+    outline: none;
+}
+
+/* Reszponzív dizájn mobil eszközökhöz */
+@media (max-width: 480px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+}
+
+</style>
 @endsection

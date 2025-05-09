@@ -243,8 +243,11 @@ public function update(Request $request, $id)
     return redirect()->route('admin.hirdetesek')->with('success', 'A hirdetés sikeresen frissítve lett.');
 }
 
-    
-
+public function showWithImages($id)
+{
+    $hirdetes = HirdetesModel::with('kepek')->findOrFail($id);
+    return view('show', compact('hirdetes'));
+}
 
 
 public function sajatHirdetesek()

@@ -26,7 +26,7 @@
         <label for="status">Státusz</label>
         <select name="status" class="form-control" required>
             <option value="aktiv" {{ $hirdetes->status == 'aktiv' ? 'selected' : '' }}>Aktív</option>
-            <option value="szuneteltetve" {{ $hirdetes->status == 'szuneteltetve' ? 'selected' : '' }}>Szüneteltetve</option>
+            <option value="szuneteltetve" {{ $hirdetes->status == 'szuneteltetve' ? 'selected' : '' }}>Szüneltetve</option>
         </select>
     </div>
 
