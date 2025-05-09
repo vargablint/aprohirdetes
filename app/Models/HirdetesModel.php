@@ -43,7 +43,7 @@ public function scopePopular($query)
 
     public function kepek(): HasMany
     {
-        return $this->hasMany(KepekModel::class);
+        return $this->hasMany(KepekModel::class,'hirdetesek_id');
     }
 
     public function telepules()
