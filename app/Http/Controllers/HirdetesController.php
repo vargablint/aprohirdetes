@@ -243,8 +243,11 @@ public function update(Request $request, $id)
     return redirect()->route('admin.hirdetesek')->with('success', 'A hirdetés sikeresen frissítve lett.');
 }
 
-    
-
+public function showWithImages($id)
+{
+    $hirdetes = HirdetesModel::with('kepek')->findOrFail($id);
+    return view('show', compact('hirdetes'));
+}
 
 
 public function sajatHirdetesek()
@@ -256,4 +259,16 @@ public function sajatHirdetesek()
 
     return view('sajathirdetes', compact('hirdetesek'));
 }
+
+    public function getUser(Request $req){
+        //Vissza kell adni az ügyfél adatait
+        $user = User::find($req->uid);
+        if(!$user){
+            $data['message'] = "Nincs ilyen ügyfél";
+            return response()->json($data,400);
+        }
+        $data['user'] = $user;
+        return response()->json($data,200);
+
+    }
 }

@@ -2,7 +2,7 @@
   <a class="navbar-brand mx-auto" href="{{ url('/') }}">
     <h1 class="hub-text">HUB</h1>
   </a>
-  <div class="container">
+  <div class="container-fluid">
    
     <!-- Kategóriák -->
     <ul class="navbar-nav ml-auto">
@@ -115,6 +115,8 @@
           <li><a class="dropdown-item" href="{{route('admin')}}">Admin</a></li>
         </ul>
       </li>
+
+
 
       @endif
       @endif

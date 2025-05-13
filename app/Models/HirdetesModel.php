@@ -36,15 +36,16 @@ public $primaryKey = "hirdetesek_id";
     // HirdetesModel
 
 
-    public function kepek(): HasMany
+    public function kepek()
     {
-        return $this->hasMany(KepekModel::class);
+        return $this->hasMany(KepekModel::class, 'hirdetesek_id');
     }
 
     public function telepules()
 {
     return $this->belongsTo(TelepulesModel::class, 'telepules_id');
 }
+
 
     
 }

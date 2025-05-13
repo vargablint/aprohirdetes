@@ -17,7 +17,6 @@ Route::get('/', [HirdetesController::class, 'legnepszerubb'])->name('fooldal');
 
 
 
-
 Route::get('/kategoria', function () {
     return view('kategoria');
 })->name('kategoria');
@@ -67,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hirdetes/{id}/edit', [HirdetesController::class, 'edit'])->name('hirdetesek.szerkesztes');
     Route::put('/hirdetes/{id}', [HirdetesController::class, 'update'])->name('hirdetesek.frissites');
 
+    Route::get('/aprohirdetesek/{id}/kepek', [HirdetesController::class, 'showWithImages'])->name('hirdetesek.kepek');
 
 
 
@@ -122,6 +122,7 @@ Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
 })->name('logout');
+
 
 
 

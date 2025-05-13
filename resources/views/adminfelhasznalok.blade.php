@@ -25,9 +25,12 @@
                 <td>{{ $user->is_admin ? 'Admin' : 'Felhasználó' }}</td> <!-- Admin státusz -->
                 <td>
                     <a href="{{ route('admin.user.edit', $user->user_id) }}" class="btn btn-primary">Szerkesztés</a>
-                    @csrf
+                    
+                    <!-- Delete form -->
+                    <form action="{{ route('admin.user.delete', $user->user_id) }}" method="POST" style="display:inline-block;">
+                        @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger btn-sm" onclick="return confirm('Biztos törlöd?')">Törlés</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Biztos törlöd?')">Törlés</button>
                     </form>
                 </td>
             </tr>
