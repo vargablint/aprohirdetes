@@ -20,6 +20,7 @@
         @yield('content')
     </div>
     
+    
 
 
     <footer class="bg-dark container-fluid mt-auto" style="order: 3;">

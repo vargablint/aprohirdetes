@@ -25,8 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $legnepszerubb = HirdetesModel::popular()->get(); // Meghívjuk a scope-ot
+        $hirdetesek = HirdetesModel::all()
+            ->sortByDesc('eladott')
+            ->take(3); // Meghívjuk a scope-ot
         
-        return view('welcome', compact('legnepszerubb'));
+        return view('welcome', compact('hirdetesek'));
     }
 }

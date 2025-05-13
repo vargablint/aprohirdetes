@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -16,7 +17,8 @@ public $primaryKey = "user_id";
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -30,11 +32,7 @@ public $primaryKey = "user_id";
 
     public function listings(): HasMany
     {
-        return $this->hasMany(Listing::class);
+        return $this->hasMany(HirdetesModel::class);
     }
 
-    public function purchases(): HasMany
-    {
-        return $this->hasMany(Purchase::class, 'vevo_id');
-    }
 }

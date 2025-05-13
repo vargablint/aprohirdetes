@@ -23,29 +23,10 @@ class HirdetesModel extends Model
             'telepules_id',
         ];
 
-        public function user(): BelongsTo
-        {
-            return $this->belongsTo(User::class);
-        }
-
-
-        public function vasarlasok(): BelongsTo
-        {
-            return $this->belongsTo(VasarlasModel::class, 'hirdetes_id');
-
-        }
-        public function kategoria()
-        {
-            return $this->belongsTo(KategoriaModel::class, 'kategoria_id'); // Feltételezve, hogy a kategoria_id a kapcsolat
-        }
-
-        // HirdetesModel
-    public function scopePopular($query)
-    {
-        return $query->where('is_popular', true)
-            ->orderBy('views', 'desc')
-            ->take(10);  // Csak a 10 legnépszerűbb
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 
         public function kepek(): HasMany
         {
@@ -56,4 +37,9 @@ class HirdetesModel extends Model
     {
         return $this->belongsTo(TelepulesModel::class, 'telepules_id');
     }
+
+
+
+    
 }
+

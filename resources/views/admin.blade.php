@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container mt-4">
+@foreach($hirdetesek as $hirdetes)
     <div class="row g-4 justify-content-center">
         <!-- Hirdetés kártya -->
         <div class="col-3">
@@ -9,8 +9,7 @@
                 <div class="card-header text-center">
                     <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
                 </div>
-               
-                <img src="{{ asset('storage/' . ($hirdetes->kepek->first()->image_path ?? 'kepek/polo.png')) }}" class="card-img-top" alt="Termék képe">
+                <img src="{{asset('images/polo.png')}}" class="card-img-top" alt="Termék képe">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title">{{ $hirdetes->title }}</h5>
                     <p class="card-text mt-0">Ár: {{ $hirdetes->ar }} Ft</p>
@@ -26,6 +25,5 @@
             </div>
         </div>
     </div>
-
 @endforeach
 @endsection

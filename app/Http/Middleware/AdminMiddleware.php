@@ -16,12 +16,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check() || (Auth::user()->tipus !== "admin")){
-            abort(403,"Hozzáférés megtagadva");
-        }
-        else{
+        if (Auth::check() && Auth::user()->role === 'admin') {
             return $next($request);
         }
+    
+        abort(403, 'Nincs jogosultságod az admin felülethez.');
         
     }
 }

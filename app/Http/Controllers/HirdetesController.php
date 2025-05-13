@@ -9,7 +9,7 @@ use App\Models\KepekModel;
 use App\Models\KategoriaModel;
 use App\Models\User;
 use App\Models\TelepulesModel;
-
+use Symfony\Component\ErrorHandler\Debug;
 
 class HirdetesController extends Controller
 {
@@ -103,13 +103,68 @@ class HirdetesController extends Controller
     }
 
 
+    public function adminfelhasznalok()
+    {
+        $users = User::all();
+        return view('adminfelhasznalok', compact('users'));
+    }
+
+    
+public function editUser($id)
+{
+    $user = User::findOrFail($id);
+    return view('edit_user', compact('user'));
+}
+
+public function updateUser(Request $request, $id)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'is_admin' => 'required|in:0,1',
+    ]);
+
+    $user = User::findOrFail($id);
+    $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'is_admin' => $request->is_admin,
+    ]);
+
+
+
+
+    $user->save();
+
+    return redirect()->route('adminfelhasznalok')->with('success', 'Felhasználó frissítve!');
+}
+
+public function deleteUser($id)
+{
+    $user = User::findOrFail($id);
+    $user->delete();
+
+    return redirect()->route('adminfelhasznalok')->with('success', 'Felhasználó törölve!');
+}
+
+
+
+public function adminHirdetesek()
+{
+    // Az adminokhoz tartozó összes hirdetés lekérdezése
+    $hirdetesek = HirdetesModel::with('user')->get();
+
+    return view('adminhirdetesek', compact('hirdetesek'));
+}
+
+
 
 
     
 
     public function show(HirdetesModel $hirdetes)
     {
-        return response()->json($hirdetes->load('kategoriak', 'user'));
+        return response()->json($hirdetes->load('kategoria', 'user', 'telepules', 'kepek'));
     }
 
     public function store(Request $request)
@@ -123,10 +178,8 @@ class HirdetesController extends Controller
             'status' => 'in:active,sold,expired',
             'kepek.*' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
-    
-        // Új hirdetés létrehozása
         $hirdetes = new HirdetesModel();
-        $hirdetes->user_id = 1;
+        $hirdetes->user_id = Auth::id();
         $hirdetes->title = $validatedData['title'];
         $hirdetes->leiras = $validatedData['leiras'];
         $hirdetes->ar = $validatedData['ar'];
@@ -134,25 +187,9 @@ class HirdetesController extends Controller
         $hirdetes->telepules_id = $validatedData['telepules_id'];
         $hirdetes->status = 'aktiv'; 
         
-        $hirdetes->save();
-
-
-         // Képek mentése, ha vannak
-         if ($request->hasFile('kepek')) {
-            foreach ($request->file('kepek') as $fajl) {
-                $path = $fajl->store('kepek', 'public');
         
-                KepekModel::create([
-                    'hirdetesek_id' => $hirdetes->hirdetesek_id,
-                    'image_path' => $path,
-                ]);
-            }
-        }
 
-      
-
-
-
+        $hirdetes->save();
     
         return redirect()->route('eladas')->with('success', 'Hirdetés sikeresen feltöltve!');
     }
@@ -176,8 +213,7 @@ class HirdetesController extends Controller
     public function index()
     {
         // Lekérjük a legnépszerűbb hirdetéseket
-        $legnepszerubb = HirdetesModel::with('kepek')
-            ->where('is_popular', true)
+        $legnepszerubb = HirdetesModel::where('is_popular', true)
             ->orderBy('views', 'desc')  // Például nézetek száma szerint
             ->take(10)  // Ha csak a 10 legnépszerűbb hirdetést szeretnéd
             ->get();
@@ -185,8 +221,15 @@ class HirdetesController extends Controller
         return view('welcome', compact('legnepszerubb'));
     }
 
-    public function user()
-{
-    return $this->belongsTo(User::class, 'user_id'); // Feltételezve, hogy a hirdetesek táblában user_id található
-}
+    public function getUser(Request $req){
+        //Vissza kell adni az ügyfél adatait
+        $user = User::find($req->user_id);
+        if(!$user){
+            $data['message'] = "Nincs ilyen ügyfél";
+            return response()->json($data,400);
+        }
+        $data['user'] = $user;
+        return response()->json($data,200);
+
+    }
 }

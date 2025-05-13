@@ -8,11 +8,13 @@ use App\Http\Controllers\VasarlasController;
 use App\Http\Controllers\KosarController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\KeresesController;
+use App\Http\Controllers\HomeController;
+
+
 
 
 
 Route::get('/', [HirdetesController::class, 'legnepszerubb'])->name('fooldal');
-
 
 
 
@@ -47,6 +49,32 @@ Route::post('/hirdetesek', [HirdetesController::class, 'store'])->name('hirdetes
 
 Route::get('/eladas', [HirdetesController::class, 'create'])->name('eladas');
 
+Route::middleware('auth')->get('/sajathirdetes', [HirdetesController::class, 'sajatHirdetesek'])->name('hirdetesek.sajat');
+Route::middleware(['auth'])->group(function () {
+    Route::delete('/hirdetesek/{id}/torles', [HirdetesController::class, 'torles'])->name('hirdetesek.torles');
+
+    Route::middleware(['auth'])->prefix('admin')->group(function () {
+        Route::get('/adminfelhasznalok', [HirdetesController::class, 'adminfelhasznalok'])->name('adminfelhasznalok');
+        Route::get('/felhasznalo/{id}/edit', [HirdetesController::class, 'editUser'])->name('admin.user.edit');
+        Route::post('/felhasznalo/{id}/update', [HirdetesController::class, 'updateUser'])->name('admin.user.update');
+        Route::delete('/felhasznalo/{id}', [HirdetesController::class, 'deleteUser'])->name('admin.user.delete');
+    });
+    Route::get('/admin/hirdetesek', [HirdetesController::class, 'adminHirdetesek'])->name('admin.hirdetesek');
+    Route::get('/admin', [HirdetesController::class, 'admin'])->name('admin');
+
+    Route::delete('/hirdetes/{id}', [HirdetesController::class, 'destroy'])->name('hirdetesek.torles');
+
+    Route::get('/hirdetes/{id}/edit', [HirdetesController::class, 'edit'])->name('hirdetesek.szerkesztes');
+    Route::put('/hirdetes/{id}', [HirdetesController::class, 'update'])->name('hirdetesek.frissites');
+
+    Route::get('/aprohirdetesek/{id}/kepek', [HirdetesController::class, 'showWithImages'])->name('hirdetesek.kepek');
+
+
+
+});
+
+
+
 
 
 
@@ -64,11 +92,8 @@ Route::get('/kosar/format', [KosarController::class, 'format'])->name('kosar.for
 
 Route::get('/hirdetes/uj', [HirdetesController::class, 'create'])->name('ujhirdetes');
 Route::post('/hirdetes/uj', [HirdetesController::class, 'store']);
-Route::get('/hirdetes/{hirdetesek_id}', [HirdetesController::class, 'show']);
 Route::get('/hirdetes/modositas/{hirdetesek_id}', [HirdetesController::class, 'edit']);
 Route::post('/hirdetes/modositas/{hirdetesek_id}', [HirdetesController::class, 'update']);
-Route::post('/hirdetes/torles', [HirdetesController::class, 'destroy']);
-Route::get('/hirdetes/torles/{hirdetesek_id}', [HirdetesController::class, 'destroyConfirm'])->name('destroyConfirm');
 
 
 
@@ -93,7 +118,6 @@ Route::get('/vasarlasok/lezaras/{lezaras_id}',[VasarlasController::class,'close'
 
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 // Logout route
@@ -102,16 +126,12 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+
+
+
 Auth::routes();
 
 Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kategoria');
 Route::get('/rolunk',function(){
     return view('rolunk');
 })->name('rolunk');
-
-
-
-
-
-Route::get('/kereses', [KeresesController::class, 'keres']);
-
