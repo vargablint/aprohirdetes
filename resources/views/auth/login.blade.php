@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+<link rel="stylesheet" href="{{asset("css/login.css")}}">
+
+
 @section('content')
 <div class="login-page">
         <div class="form-container">

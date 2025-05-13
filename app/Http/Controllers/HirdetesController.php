@@ -262,7 +262,7 @@ public function sajatHirdetesek()
 
     public function getUser(Request $req){
         //Vissza kell adni az ügyfél adatait
-        $user = User::find($req->uid);
+        $user = User::find($req->user_id);
         if(!$user){
             $data['message'] = "Nincs ilyen ügyfél";
             return response()->json($data,400);
