@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HirdetesModel;
+use App\Models\KategoriaModel;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $legnepszerubb = HirdetesModel::popular()->get(); // Meghívjuk a scope-ot
+        
+        return view('welcome', compact('legnepszerubb'));
     }
 }

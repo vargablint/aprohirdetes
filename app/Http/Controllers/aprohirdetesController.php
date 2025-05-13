@@ -6,7 +6,5 @@ use Illuminate\Http\Request;
 
 class aprohirdetesController extends Controller
 {
-    public function index(){
-        return view('welcome');
-    }
+ 
 }

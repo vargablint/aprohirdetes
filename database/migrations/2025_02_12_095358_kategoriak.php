@@ -10,6 +10,8 @@ return new class extends Migration {
         Schema::create('kategoriak', function (Blueprint $table) {
             $table->id('kategoria_id');
             $table->string('nev');
+            $table->text('tartalom')->nullable();
+            $table->timestamps();
            
            
         });

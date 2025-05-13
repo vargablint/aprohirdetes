@@ -6,7 +6,7 @@
    
     <!-- Kategóriák -->
     <ul class="navbar-nav ml-auto">
-      <form class="d-flex" action="#" method="GET">
+      <form class="d-flex" action="{{ url('/kereses') }}" method="GET">
         <input class="form-control me-2" type="search" placeholder="Keresés..." aria-label="Keresés" name="query">
         <button class="btn btn-outline-success" type="submit">Keresés</button>
       </form>
@@ -17,9 +17,9 @@
           Nő
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{{route('kategoria','1')}}">Ruha</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','2')}}">Parfüm</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','3')}}">Kiegészítők</a></li>
+          <li><a class="dropdown-item"  href="{{ route('noi.ruhak') }}">Ruha</a></li>
+          <li><a class="dropdown-item" href="{{ route('noiparfum')}}">Parfüm</a></li>
+          <li><a class="dropdown-item" href="{{route('noikieg')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
@@ -29,9 +29,9 @@
           Férfi
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{{route('kategoria','4')}}">Ruha</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','5')}}">Parfüm</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','6')}}">Kiegészítők</a></li>
+          <li><a class="dropdown-item" href="{{route('ferfiruha')}}">Ruha</a></li>
+          <li><a class="dropdown-item" href="{{route('ferfiparfum')}}">Parfüm</a></li>
+          <li><a class="dropdown-item" href="{{route('ferfikieg')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
@@ -41,9 +41,9 @@
           Otthon
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{{route('kategoria','7')}}">Bútor</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','8')}}">Dekoráció</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','9')}}">Háztartási eszközök</a></li>
+          <li><a class="dropdown-item" href="{{route('otthonbut')}}">Bútor</a></li>
+          <li><a class="dropdown-item" href="{{route('otthondek')}}">Dekoráció</a></li>
+          <li><a class="dropdown-item" href="{{route('otthonhaz')}}">Háztartási eszközök</a></li>
         </ul>
       </li>
 
@@ -53,9 +53,9 @@
           Elektronikai eszközök
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{{route('kategoria','10')}}">Mobiltelefonok</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','11')}}">Laptopok</a></li>
-          <li><a class="dropdown-item" href="{{route('kategoria','12')}}">Kiegészítők</a></li>
+          <li><a class="dropdown-item" href="{{route('eemobil')}}">Mobiltelefonok</a></li>
+          <li><a class="dropdown-item" href="{{route('eelaptopok')}}">Laptopok</a></li>
+          <li><a class="dropdown-item" href="{{route('eekieg')}}">Kiegészítők</a></li>
         </ul>
       </li>
 
@@ -76,12 +76,28 @@
       @else
       <!-- Ha a felhasználó nincs bejelentkezve -->
       <li class="nav-item">
-        <a class="nav-link btn btn-primary text-white" href="{{ route('login') }}">Login</a>
+        <a class="nav-link btn btn-primary text-white" href="{{ route('login') }}">Bejelentkezés</a>
       </li>
       <li class="nav-item">
         <a class="nav-link btn btn-secondary text-white" href="{{ route('register') }}">Regisztráció</a>
       </li>
       @endif
+
+      !-- Kosár ikon -->
+      <li class="nav-item ms-3">
+        <a class="nav-link position-relative" href="{{ route('kosar.megtekint') }}">
+          🛒
+          @php
+            $kosar = session('kosar', []);
+            $osszdb = array_sum(array_column($kosar, 'quantity'));
+          @endphp
+          @if($osszdb > 0)
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ $osszdb }}
+            </span>
+          @endif
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

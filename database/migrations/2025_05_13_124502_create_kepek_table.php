@@ -4,14 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
+
     public function up()
     {
         Schema::create('kepek', function (Blueprint $table) {
             $table->id('kepek_id');
-            $table->foreignId('hirdetesek_id')->references('hirdetesek_id')->on('hirdetesek')->onDelete('cascade');
+            $table->unsignedBigInteger('hirdetesek_id');
             $table->string('image_path');
             $table->timestamps();
+
+            $table->foreign('hirdetesek_id')->references('hirdetesek_id')->on('hirdetesek')->onDelete('cascade');
         });
     }
 
@@ -19,4 +23,6 @@ return new class extends Migration {
     {
         Schema::dropIfExists('kepek');
     }
+
+
 };

@@ -61,6 +61,10 @@ class KategoriaController extends Controller
     public function listaz($kid){
         $kategoria = KategoriaModel::find($kid);
     }
+
+
+
+    
 }
 
 

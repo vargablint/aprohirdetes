@@ -9,38 +9,51 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class HirdetesModel extends Model
 {
-    use HasFactory;
+        use HasFactory;
 
-public $table = "hirdetesek";
-public $primaryKey = "hirdetesek_id";
-    protected $fillable = [
-        'felhasznalo_id',
-        'kategoria_id',
-        'title',
-        'leiras',
-        'ar',
-        'status',
-        'telepules',
-    ];
+    public $table = "hirdetesek";
+    public $primaryKey = "hirdetesek_id";
+        protected $fillable = [
+            'user_id',
+            'kategoria_id',
+            'title',
+            'leiras',
+            'ar',
+            'status',
+            'telepules_id',
+        ];
 
-    public function user(): BelongsTo
+        public function user(): BelongsTo
+        {
+            return $this->belongsTo(User::class);
+        }
+
+
+        public function vasarlasok(): BelongsTo
+        {
+            return $this->belongsTo(VasarlasModel::class, 'hirdetes_id');
+
+        }
+        public function kategoria()
+        {
+            return $this->belongsTo(KategoriaModel::class, 'kategoria_id'); // Feltételezve, hogy a kategoria_id a kapcsolat
+        }
+
+        // HirdetesModel
+    public function scopePopular($query)
     {
-        return $this->belongsTo(User::class);
+        return $query->where('is_popular', true)
+            ->orderBy('views', 'desc')
+            ->take(10);  // Csak a 10 legnépszerűbb
     }
 
-    public function kategoria(): BelongsTo
-    {
-        return $this->belongsTo(KategoriaModel::class);
-    }
+        public function kepek(): HasMany
+        {
+            return $this->hasMany(KepekModel::class,'hirdetesek_id');
+        }
 
-    public function vasarlasok(): BelongsTo
+        public function telepules()
     {
-        return $this->belongsTo(VasarlasModel::class, 'hirdetes_id');
+        return $this->belongsTo(TelepulesModel::class, 'telepules_id');
     }
-
-    public function telepules()
-{
-    return $this->belongsTo(TelepulesModel::class, 'telepules_id');
 }
-}
-

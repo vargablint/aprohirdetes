@@ -5,15 +5,16 @@ use App\Http\Controllers\aprohirdetesController;
 use App\Http\Controllers\KategoriaController;
 use App\Http\Controllers\HirdetesController;
 use App\Http\Controllers\VasarlasController;
+use App\Http\Controllers\KosarController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\KeresesController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('fooldal');
 
-Route::get('/hirdetes', function () {
-    return view('hirdetes');
-})->name('hirdetes');
+Route::get('/', [HirdetesController::class, 'legnepszerubb'])->name('fooldal');
+
+
+
 
 Route::get('/kategoria', function () {
     return view('kategoria');
@@ -23,7 +24,44 @@ Route::get('/vasarlas', function () {
     return view('vasarlas');
 })->name('vasarlas');
 
-Route::get('/hirdetesek',[HirdetesController::class,'index'])->name('hirdetesek');
+
+
+Route::get('/noi-ruhak', [HirdetesController::class, 'noiruhak'])->name('noi.ruhak');
+Route::get('/noiparfum', [HirdetesController::class, 'noiparfum'])->name('noiparfum');
+Route::get('/noikieg', [HirdetesController::class, 'noikieg'])->name('noikieg');
+
+Route::get('/ferfiruha', [HirdetesController::class, 'ferfiruha'])->name('ferfiruha');
+Route::get('/ferfiparfum', [HirdetesController::class, 'ferfiparfum'])->name('ferfiparfum');
+Route::get('/ferfikieg', [HirdetesController::class, 'ferfikieg'])->name('ferfikieg');
+
+Route::get('/otthonbut', [HirdetesController::class, 'otthonbut'])->name('otthonbut');
+Route::get('/otthondek', [HirdetesController::class, 'otthondek'])->name('otthondek');
+Route::get('/otthonhaz', [HirdetesController::class, 'otthonhaz'])->name('otthonhaz');
+
+Route::get('/eemobil', [HirdetesController::class, 'eemobil'])->name('eemobil');
+Route::get('/eelaptopok', [HirdetesController::class, 'eelaptopok'])->name('eelaptopok');
+Route::get('/eekieg', [HirdetesController::class, 'eekieg'])->name('eekieg');
+
+Route::post('/hirdetesek', [HirdetesController::class, 'store'])->name('hirdetesek.store');
+
+
+Route::get('/eladas', [HirdetesController::class, 'create'])->name('eladas');
+
+
+
+
+
+
+
+
+
+Route::get('/kosar', [KosarController::class, 'megtekint'])->name('kosar.megtekint');
+Route::post('/kosar/hozzaad/{id}', [KosarController::class, 'hozzaad'])->name('kosar.hozzaad');
+Route::post('/kosar/torol/{id}', [KosarController::class, 'torol'])->name('kosar.torol');
+
+Route::get('/kosar/format', [KosarController::class, 'format'])->name('kosar.format');
+
+
 Route::get('/hirdetes/uj', [HirdetesController::class, 'create'])->name('ujhirdetes');
 Route::post('/hirdetes/uj', [HirdetesController::class, 'store']);
 Route::get('/hirdetes/{hirdetesek_id}', [HirdetesController::class, 'show']);
@@ -70,4 +108,10 @@ Route::get('/kategoria/{kid}',[KategoriaController::class,'listaz'])->name('kate
 Route::get('/rolunk',function(){
     return view('rolunk');
 })->name('rolunk');
+
+
+
+
+
+Route::get('/kereses', [KeresesController::class, 'keres']);
 
