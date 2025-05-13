@@ -33,6 +33,12 @@ public $primaryKey = "user_id";
     public function listings(): HasMany
     {
         return $this->hasMany(HirdetesModel::class);
+
     }
+
+    public function getAuthPassword()
+{
+    return $this->jelszo;
+}
 
 }

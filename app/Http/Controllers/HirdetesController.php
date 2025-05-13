@@ -9,6 +9,7 @@ use App\Models\KepekModel;
 use App\Models\KategoriaModel;
 use App\Models\User;
 use App\Models\TelepulesModel;
+use App\Http\Controllers\Validator;
 use Symfony\Component\ErrorHandler\Debug;
 
 class HirdetesController extends Controller
@@ -33,6 +34,7 @@ class HirdetesController extends Controller
         $hirdetesek = HirdetesModel::with('kepek')->where('kategoria_id', 1)->get();
 
         return view('noiruhak', compact('hirdetesek'));
+        
     }
 
     public function noiparfum()
@@ -186,11 +188,32 @@ public function adminHirdetesek()
         $hirdetes->kategoria_id = $validatedData['kategoria_id'];
         $hirdetes->telepules_id = $validatedData['telepules_id'];
         $hirdetes->status = 'aktiv'; 
+
+        if (!Auth::check()) {
+        return redirect()->route('login')->with('message', 'Előtte regisztrálj fiókot vagy jelentkezz be!');
+}
         
         
 
         $hirdetes->save();
     
+         // Képek mentése, ha vannak
+         if ($request->hasFile('kepek')) {
+            foreach ($request->file('kepek') as $fajl) {
+                $path = $fajl->store('kepek', 'public');
+        
+                KepekModel::create([
+                    'hirdetesek_id' => $hirdetes->hirdetesek_id,
+                    'image_path' => $path,
+                ]);
+            }
+        }
+
+      
+
+
+
+
         return redirect()->route('eladas')->with('success', 'Hirdetés sikeresen feltöltve!');
     }
 
@@ -203,11 +226,31 @@ public function adminHirdetesek()
     return view('eladas',compact('telepulesek'), compact('kategoriak'));  // Telepulesek változó átadása a nézetnek
 }
 
-    public function destroy(HirdetesModel $hirdetes)
-    {
-        $hirdetes->delete();
-        return response()->json(['message' => 'Hirdetés törölve!']);
+public function destroy($id)
+{
+    $hirdetes = HirdetesModel::findOrFail($id);
+
+    // Ellenőrzés, hogy a bejelentkezett felhasználó a tulajdonos-e
+    if ($hirdetes->user_id !== Auth::id()) {
+        abort(403, 'Nincs jogosultságod ezt a hirdetést törölni.');
     }
+
+    // Csak a hirdetés törlése
+    $hirdetes->delete();
+    return redirect()->back()->with('success', 'A hirdetés sikeresen törölve lett.');
+
+
+}
+    public function sajatHirdetesek()
+{
+    
+    
+    $user = Auth::user();
+    $hirdetesek = HirdetesModel::where('user_id', Auth::id())->get();
+
+    return view('sajathirdetes', compact('hirdetesek'));
+}
+
 
 
     public function index()
@@ -225,11 +268,74 @@ public function adminHirdetesek()
         //Vissza kell adni az ügyfél adatait
         $user = User::find($req->user_id);
         if(!$user){
-            $data['message'] = "Nincs ilyen ügyfél";
+            $data['message'] = "Nincs ilyen felhasznalo";
             return response()->json($data,400);
         }
         $data['user'] = $user;
         return response()->json($data,200);
 
     }
+
+    public function allUser(){
+        $users = User::paginate(10);
+        $data['users'] = $users;
+        return response()->json($data,200);
+    }
+
+        public function userLetrehozas(Request $req){
+            $user = new User;
+            $user-> name = $req->name;
+            $user-> email = $req->email;
+            $user->tel_szam = $req->tel_szam;
+            $user->password = bcrypt($req->password);
+            $user->save();
+            
+            return response()->json(['user' => $user], 200);
+            
+        }
+
+
+        public function userTorles($id)
+{
+    $user = User::find($id);
+
+    if (!$user) {
+        return response()->json(['message' => 'Felhasználó nem található.'], 404);
+    }
+
+    $user->delete();
+
+    return response()->json(['message' => 'Felhasználó sikeresen törölve.'], 200);
+}
+
+
+
+
+
+
+    public function edit($id)
+{
+    $hirdetes = HirdetesModel::findOrFail($id);
+    return view('szerkesztes', compact('hirdetes'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'leiras' => 'required|string',
+        'ar' => 'required|numeric',
+        'status' => 'required|string|in:aktiv,szuneteltetve',
+    ]);
+
+    $hirdetes = HirdetesModel::findOrFail($id);
+    $hirdetes->update([
+        'title' => $request->title,
+        'leiras' => $request->leiras,
+        'ar' => $request->ar,
+        'status' => $request->status,
+    ]);
+
+    return redirect()->route('admin.hirdetesek')->with('success', 'A hirdetés sikeresen frissítve lett.');
+}
 }

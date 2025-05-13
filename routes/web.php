@@ -69,6 +69,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/aprohirdetesek/{id}/kepek', [HirdetesController::class, 'showWithImages'])->name('hirdetesek.kepek');
 
+    Route::get('/kereses', [KeresesController::class, 'keres']);
+
+
+
 
 
 });

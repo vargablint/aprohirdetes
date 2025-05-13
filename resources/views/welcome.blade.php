@@ -30,8 +30,8 @@
                     <img src="{{asset('images/profilkép.jpg')}}" alt="Profilkép" class="rounded-circle" style="width: 50px; height: 50px;">
                 </div>
              
-              <img src="{{ asset('storage/' . ($hirdetes->kepek->first()->image_path ?? 'kepek/polo.png')) }}" class="card-img-top" alt="Termék képe">
-                <div class="card-body d-flex flex-column justify-content-between">
+                    <img src="{{ asset('storage/' . ($hirdetes->kepek->first()->image_path ?? 'kepek/polo.png')) }}" class="card-img-top" alt="Termék képe">
+                    <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="card-title">{{ $hirdetes->title }}</h5>
                     <p class="card-text">Ár: {{ $hirdetes->ar }} Ft</p>
                     <form action="{{ route('kosar.hozzaad', ['id' => $hirdetes->hirdetesek_id]) }}" method="POST">
